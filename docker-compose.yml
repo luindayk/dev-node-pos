@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: posts
+      MYSQL_DATABASE: posts
+      MYSQL_USER: posts
+      MYSQL_PASSWORD: posts
+    ports:
+      - '3310:3306'
