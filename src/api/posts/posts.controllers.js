@@ -14,7 +14,10 @@ export async function detail(request, h) {
 
 export async function create(request, h) {
     const { payload } = request;
-    const post = await postsDAO.create(payload);
+    const { id: userId } = request.auth.credentials;
+    const post = await postsDAO.create({
+        ...payload, userId
+    });
     return h.response(post).code(CREATED);
 }
 

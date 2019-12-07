@@ -3,14 +3,13 @@ import Env from './environment.config';
 import Plugins from './plugins.config';
 import Auth from './auth.config';
 
-const init = async () => {
-    const server = Hapi.server({
-        port: 3000,
-        host: 'localhost'
-    });
+const server = Hapi.server({
+    port: 3000,
+    host: 'localhost'
+});
 
-    await server.register(Plugins());
-    
+const init = async () => {
+    await server.register(Plugins());    
     Auth(server);
     
     server.route({
@@ -18,11 +17,19 @@ const init = async () => {
         path: '/',
         handler: async (request, h) => {
             return 'Hello hapi';
+        },
+        config: {
+            auth: false
         }        
-    });    
+    });
 
+    await server.initialize();
+    return server;
+}
+
+export const start = async () => {
+    await init();
     await server.start();
-
     console.log('\nServer running on %s', server.info.uri);
 }
 
@@ -30,5 +37,3 @@ process.on('unhandledRejection', (err) => {
     console.log(err);
     process.exit(1);
 });
-
-init();

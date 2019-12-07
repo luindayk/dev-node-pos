@@ -7,6 +7,7 @@ export default class PostsDAO {
     findAll() {
         const params = {
             include: [
+                'user',
                 'tags'
             ]
         };
@@ -21,6 +22,7 @@ export default class PostsDAO {
         const options = {
             where: { id },
             include: [
+                'user',
                 'tags'
             ]
         };
@@ -29,7 +31,7 @@ export default class PostsDAO {
     }
 
     async update(data, id) {
-        const post = await this.findByID(id);
+        const post = await this.findById(id);
         return post.update(data);
     }
 

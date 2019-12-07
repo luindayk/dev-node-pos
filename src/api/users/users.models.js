@@ -14,5 +14,9 @@ export default (sequelize, dataTypes) => {
         user.password = hash;
     });
 
+    User.associate = models => {
+        models.user.hasMany(models.post);
+    }
+
     return User;
 };
