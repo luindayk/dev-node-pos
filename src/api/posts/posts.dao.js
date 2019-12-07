@@ -1,26 +1,40 @@
 import { instances } from 'hapi-sequelizejs';
-
-const Post = instances.getModel('post');
+import { getObjectOr404 } from '../utils/database.utils';
 
 export default class PostsDAO {
+    model = instances.getModel('post');
+
     findAll() {
-        return Post.findAll();
+        const params = {
+            include: [
+                'tags'
+            ]
+        };
+        return this.model.findAll(params);
     }
 
     create(data) {
-        return Post.create(data);
+        return this.model.create(data);
     }
 
-    findById(id) {
-        return Post.findByPk(id);
+    async findById(id) {
+        const options = {
+            where: { id },
+            include: [
+                'tags'
+            ]
+        };
+
+        return getObjectOr404(this.model, options);
     }
 
     async update(data, id) {
-        await Post.update(data, { where: { id }});
-        return await this.findById(id);
+        const post = await this.findByID(id);
+        return post.update(data);
     }
 
-    destroy(id) {
-        return Post.destroy({ where: {id}});
+    async destroy(id) {
+        const post = await this.findById(id);
+        return post.destroy();
     }
 }

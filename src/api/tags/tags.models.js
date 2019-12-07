@@ -4,8 +4,7 @@ export default (sequelize, dataTypes) => {
     class Tag extends Model {};
     
     Tag.init({
-        name: dataTypes.STRING,
-        postId: dataTypes.INTEGER
+        name: dataTypes.STRING
     }, { sequelize, modelName: 'tag' });
 
     Tag.associate = (models) => {

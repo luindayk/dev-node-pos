@@ -13,7 +13,7 @@ export async function list(request, h) {
 export async function detail(request, h) {
     const { params } = request;
 
-    return await tagsDAO.getById(params);
+    return await tagsDAO.findById(params);
 }
 
 export async function create(request, h) {
