@@ -5,14 +5,16 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "nodemon .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node -r esm ./node_modules/.bin/lab"
   },
   "author": "Willyan L. Machado",
   "license": "ISC",
   "dependencies": {
     "@hapi/boom": "^8.0.1",
+    "@hapi/code": "^7.0.0",
     "@hapi/hapi": "^18.4.0",
     "@hapi/joi": "^16.1.7",
+    "@hapi/lab": "^21.0.0",
     "bcrypt": "^3.0.7",
     "dotenv": "^8.2.0",
     "esm": "^3.2.25",

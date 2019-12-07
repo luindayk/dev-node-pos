@@ -5,7 +5,7 @@ import { Boom } from '@hapi/boom';
 import JWT from 'jsonwebtoken';
 import Env from '../../config/environment.config';
 
-export async function getToken(payload, options = {}) {
+export async function getToken(payload, options = {}) { 
     return JWT.sign(payload, Env.JWT_SECRET, { expiresIn: Env.JWT_EXPIRES_IN, ...options });
 }
 
