@@ -8,10 +8,10 @@ const server = Hapi.server({
     host: 'localhost'
 });
 
-const init = async () => {
-    await server.register(Plugins());    
+export const init = async () => {
+    await server.register(Plugins());
     Auth(server);
-    
+
     server.route({
         method: 'GET',
         path: '/',
@@ -20,7 +20,7 @@ const init = async () => {
         },
         config: {
             auth: false
-        }        
+        }
     });
 
     await server.initialize();
